@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ernesto Seredinskiy | Django & PostgreSQL Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c5aa0;
+            --secondary: #3a7bd5;
+            --accent: #00d2ff;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #28a745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: transparent;
+            // background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+        
+        .resume-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .header-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .contact-info {
+            display: grid;
+            gap: 8px;
+        }
+        
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .contact-info a:hover {
+            color: var(--accent);
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 0;
+        }
+        
+        .sidebar {
+            background: var(--light);
+            padding: 30px;
+        }
+        
+        .main {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--secondary);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .skill-category {
+            margin-bottom: 15px;
+        }
+        
+        .skill-category h4 {
+            font-size: 1rem;
+            color: var(--dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .skill-items {
+            list-style: none;
+        }
+        
+        .skill-items li {
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .skill-items li:before {
+            content: "▸";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        
+        .highlight {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .highlight p {
+            margin-bottom: 10px;
+        }
+        
+        .highlight ul {
+            margin-left: 20px;
+        }
+        
+        .highlight li {
+            margin-bottom: 5px;
+        }
+        
+        .experience-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .job-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+        
+        .job-company {
+            color: var(--secondary);
+        }
+        
+        .job-period {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .job-description {
+            margin-left: 10px;
+        }
+        
+        .job-description li {
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .job-description li:before {
+            content: "→";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        
+        .project-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .project-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .project-tech {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .tech-tag {
+            background: var(--secondary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .project-description {
+            margin-bottom: 8px;
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .project-link:hover {
+            color: var(--accent);
+        }
+        
+        .languages-list {
+            list-style: none;
+        }
+        
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .language-name {
+            font-weight: 500;
+        }
+        
+        .language-level {
+            color: var(--gray);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <header>
+            <div class="header-text">
+                <h1>Ernesto Seredinskiy</h1>
+                <p>Python Backend Developer (Django & PostgreSQL)</p>
+            </div>
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i> <a href="mailto:sereernest@gmail.com">sereernest@gmail.com</a></p>
+                <p><i class="fas fa-phone"></i> <a href="tel:+79213301390">+7 (921) 330-13-90</a></p>
+                <p><i class="fab fa-telegram"></i> <a href="https://t.me/S_k_a_r_a_m_u_c_h_a">@S_k_a_r_a_m_u_c_h_a</a></p>
+                <p><i class="fab fa-github"></i> <a href="https://github.com/ErnestoAizenberg">github.com/ErnestoAizenberg</a></p>
+                <p><i class="fas fa-map-marker-alt"></i> Saint Petersburg, Russia</p>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-bullseye"></i> Quick Summary</h2>
+                    <div class="highlight">
+                        <ul>
+                            <li><strong>Django/FastAPI:</strong> 3+ years experience</li>
+                            <li><strong>PostgreSQL:</strong> Database design & optimization</li>
+                            <li><strong>Telegram API:</strong> Multiple bot integrations</li>
+                            <li><strong>WebSocket:</strong> Real-time applications</li>
+                            <li><strong>Agile/Kanban:</strong> Team collaboration experience</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-code"></i> Technical Skills</h2>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4><i class="fab fa-python"></i> Backend Development</h4>
+                            <ul class="skill-items">
+                                <li>Django & Django REST</li>
+                                <li>FastAPI</li>
+                                <li>Flask</li>
+                                <li>RESTful APIs</li>
+                                <li>WebSocket</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-database"></i> Database & DevOps</h4>
+                            <ul class="skill-items">
+                                <li>PostgreSQL</li>
+                                <li>Redis</li>
+                                <li>Docker & Docker-Compose</li>
+                                <li>SQLAlchemy</li>
+                                <li>Alembic Migrations</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-cogs"></i> APIs & Integrations</h4>
+                            <ul class="skill-items">
+                                <li>Telegram Bot API</li>
+                                <li>WebSocket</li>
+                                <li>OAuth Integration</li>
+                                <li>Third-party APIs</li>
+                                <li>Payment Systems</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-tools"></i> Tools & Methods</h4>
+                            <ul class="skill-items">
+                                <li>Git & GitHub</li>
+                                <li>Agile/Scrum/Kanban</li>
+                                <li>Test-Driven Development</li>
+                                <li>CI/CD</li>
+                                <li>Linux/CLI</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-language"></i> Languages</h2>
+                    <ul class="languages-list">
+                        <li class="language-item">
+                            <span class="language-name">Russian</span>
+                            <span class="language-level">Native</span>
+                        </li>
+                        <li class="language-item">
+                            <span class="language-name">English</span>
+                            <span class="language-level">C1 (Advanced)</span>
+                        </li>
+                    </ul>
+                </section>
+                
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-certificate"></i> Availability</h2>
+                    <ul class="skill-items">
+                        <li>Flexible remote work schedule</li>
+                        <li>Partner/equity model interest</li>
+                        <li>Quick adaptation to new technologies</li>
+                    </ul>
+                </section>
+            </div>
+            
+            <div class="main">
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+                                     
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div>
+                                <span class="job-title">Python Backend Developer</span>
+                                <span class="job-company">, Digital Solutions Agency</span>
+                            </div>
+                            <span class="job-period">02.2025 – Present</span>
+                        </div>
+
+                        <div class="">
+                            <div class="project-link" style="">
+                                <i class="fas fa-external-link-alt"></i>
+                                <a href="https://xn--36-6kch5aj8bbq6g.xn--p1ai/" target="_blank">1983 Agency</a>
+                                <span style="color: var(--gray); font-size: 0.9rem; margin-left: 10px;">(Live project)</span>
+                            </div>
+                            <p>Collaborated in cross-functional Agile team (3 Backend, 1 DevOps, 1 Frontend) to deliver full-stack solutions</p>
+                            <ul class="">
+                                <li>Developed comprehensive user dashboard with role-based access control and real-time data visualization</li>
+                                <li>Architected and maintained scalable Django REST APIs with PostgreSQL optimization and efficient query design</li>
+                                <li>Implemented dynamic content management system enabling non-technical users to manage content without code changes</li>
+                                <li>Built customer loyalty platform with bonus card system and POS integration for retail environments</li>
+                            </ul>
+                        </div>
+
+                        <br>
+
+                        <div class="padding-bottom: 55px;">
+                            <div class="project-link" style="">
+                                <i class="fas fa-external-link-alt"></i>
+                                <a href="https://supergear.co.za" target="_blank">SuperGear</a>
+                            </div>
+                            <p>Contributed to backend services for e-commerce platform specializing in electronics and gadgets</p>
+                            <ul class="">
+                                <li>Optimized product catalog management system with advanced filtering and search capabilities</li>
+                                <li>Integrated CRM system for improved customer relationship management</li>
+                            </ul>
+                        </div>
+
+                        <br>
+
+                        <div class="margin-bottom: 15px;">
+                            <div class="project-name" style="font-size: 15px;">Small business client</div>
+                            <p>Led backend development for small business e-commerce platform using Django and PostgreSQL</p>
+                            <ul class="">
+                                <li>Engineered accounting system integrated with AMOcrm API for streamlined business operations and financial tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div>
+                                <span class="job-title">Machine Learning Engineer</span>
+                                <span class="job-company">, XTTR (Remote)</span>
+                            </div>
+                            <span class="job-period">09.2023 – 02.2025</span>
+                        </div>
+                        <ul class="job-description">
+                            <li>Developed and maintained backend services using Python (FastAPI) with PostgreSQL database</li>
+                            <li>Optimized database architecture and query performance, reducing response times by 35%</li>
+                            <li>Implemented real-time features using WebSocket for live data updates</li>
+                            <li>Integrated multiple external APIs including Telegram for notification systems</li>
+                            <li>Collaborated in Agile environment with 2-week sprints and Kanban workflow</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div>
+                                <span class="job-title">Python Backend Developer</span>
+                                <span class="job-company">, Bot Development Projects</span>
+                            </div>
+                            <span class="job-period">2023 – 2024</span>
+                        </div>
+                        <ul class="job-description">
+                            <li>Developed 10+ specialized Telegram bots with Django backend and PostgreSQL database</li>
+                            <li>Created real-time chat systems with WebSocket integration</li>
+                            <li>Built content recommendation systems with personalized user experiences</li>
+                            <li>Optimized database queries and implemented caching with Redis</li>
+                            <li>Designed scalable architecture for handling thousands of concurrent users</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-project-diagram"></i> Projects</h2>
+                    
+                    <div class="project-item">
+                        <div class="project-title"><i class="fas fa-comments"></i> Telegram CRM Prototype</div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Telegram API</span>
+                            <span class="tech-tag">WebSocket</span>
+                            <span class="tech-tag">Redis</span>
+                        </div>
+                        <div class="project-description">
+                            A CRM system prototype for managing Telegram conversations, with real-time updates, message tracking, and analytics dashboard. Features include contact management, conversation threading, and automated response templates.
+                        </div>
+                        <a href="https://github.com/ErnestoAizenberg" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-title"><i class="fas fa-store"></i> CakeWorld - E-commerce Platform</div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">WebSocket</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                        <div class="project-description">
+                            Full-stack e-commerce application with real-time inventory updates, customer management, and order processing. Implemented WebSocket for live notifications and chat support.
+                        </div>
+                        <a href="https://github.com/ErnestoAizenberg/cakeworld" class="project-link"><i class="fab fa-github"></i> github.com/ErnestoAizenberg/cakeworld</a>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-title"><i class="fas fa-robot"></i> Open Manus Agent</div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">Telegram API</span>
+                            <span class="tech-tag">WebSocket</span>
+                            <span class="tech-tag">Redis</span>
+                        </div>
+                        <div class="project-description">
+                            Asynchronous service for connection management with Telegram integration. Features include real-time notifications, command processing, and browser automation.
+                        </div>
+                        <a href="https://github.com/ErnestoAizenberg/open-manus-agent" class="project-link"><i class="fab fa-github"></i> github.com/ErnestoAizenberg/open-manus-agent</a>
+                    </div>
+                </section>
+                
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Why I'm a Great Fit</h2>
+                    <div class="highlight">
+                        <p>I'm excited about the opportunity to work on HereCRM because:</p>
+                        <ul>
+                            <li>I have direct experience with your entire tech stack (Python, Django/FastAPI, PostgreSQL, Telegram API, WebSocket)</li>
+                            <li>I've built similar CRM and bot management systems before</li>
+                            <li>I thrive in Agile environments with 2-week sprints</li>
+                            <li>I'm passionate about creating scalable backend architectures</li>
+                            <li>The partner/equity model aligns with my career goals</li>
+                            <li>I can commit 15+ hours per week to ensure project success</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Resume updated: October 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
